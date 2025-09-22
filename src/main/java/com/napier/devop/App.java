@@ -1,4 +1,4 @@
-package com.napier.devops;
+package com.napier.devop;
 
 import com.mongodb.MongoClient;
 import com.mongodb.client.MongoDatabase;

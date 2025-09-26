@@ -1,25 +1,44 @@
 package com.napier.devops;
 
-public class Employee {
-        public int emp_no;
-        public String first_name;
-        public String last_name;
+/**
+ * Represents an employee
+ */
+public class Employee
+{
 
-        // extra fields for the exercise
-        public String title;     // current job title
-        public int salary;       // current salary
-        public String dept_name; // current department
-        public String manager;   // current manager full name
+    /**
+     * Employee number
+     */
+    public int emp_no;
 
-        @Override
-        public String toString() {
-            return String.format(
-                    "%d %s %s%n%s%nSalary: %d%n%s%nManager: %s%n",
-                    emp_no, first_name, last_name,
-                    title,
-                    salary,
-                    dept_name,
-                    manager
-            );
-        }
-    }
+    /**
+     * Employee's first name
+     */
+    public String first_name;
+
+    /**
+     * Employee's last name
+     */
+    public String last_name;
+
+    /**
+     * Employee's job title
+     */
+    public String title;
+
+    /**
+     * Employee's salary
+     */
+    public int salary;
+
+    /**
+     * Employee's current department
+     */
+    public String dept_name;
+
+    /**
+     * Employee's manager
+     */
+    public String manager;
+
+}

@@ -2,8 +2,7 @@ package com.napier.devops;
 
 import java.sql.*;
 
-public class App {
-
+public class App{
     /**
      * Connection to MySQL database.
      */
@@ -14,31 +13,37 @@ public class App {
      */
     public void connect()
     {
-        try {
+        try
+        {
             // Load Database driver
             Class.forName("com.mysql.cj.jdbc.Driver");
         }
-        catch (ClassNotFoundException e) {
+        catch (ClassNotFoundException e)
+        {
             System.out.println("Could not load SQL driver");
             System.exit(-1);
         }
 
-        int retries = 15;
-        for (int i = 0; i < retries; ++i) {
+        int retries = 10;
+        for (int i = 0; i < retries; ++i)
+        {
             System.out.println("Connecting to database...");
-            try {
+            try
+            {
                 // Wait a bit for db to start
-                Thread.sleep(10000);
+                Thread.sleep(30000);
                 // Connect to database
                 con = DriverManager.getConnection("jdbc:mysql://db:3306/employees?useSSL=false&allowPublicKeyRetrieval=true", "root", "example");
                 System.out.println("Successfully connected");
                 break;
             }
-            catch (SQLException sqle) {
+            catch (SQLException sqle)
+            {
                 System.out.println("Failed to connect to database attempt " + Integer.toString(i));
                 System.out.println(sqle.getMessage());
             }
-            catch (InterruptedException ie) {
+            catch (InterruptedException ie)
+            {
                 System.out.println("Thread interrupted? Should not happen.");
             }
         }
@@ -52,8 +57,7 @@ public class App {
             try {
                 // Close connection
                 con.close();
-            }
-            catch (Exception e) {
+            } catch (Exception e) {
                 System.out.println("Error closing connection to database");
             }
         }
@@ -94,19 +98,19 @@ public class App {
                             + emp.manager + "\n");
         }
     }
-
-    public static void main(String[] args) {
+    public static void main(String[] args)
+    {
         // Create new Application
-        App m = new App();
+        App a = new App();
 
         // Connect to database
-        m.connect();
-
-        Employee emp = m.getEmployee(255530);
+        a.connect();
+        // Get Employee
+        Employee emp = a.getEmployee(255530);
         // Display results
-        m.displayEmployee(emp);
+        a.displayEmployee(emp);
 
         // Disconnect from database
-        m.disconnect();
+        a.disconnect();
     }
 }

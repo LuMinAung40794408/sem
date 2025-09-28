@@ -1,0 +1,22 @@
+@startuml
+
+usecase UC1 as "Use Case 1"
+usecase UC2 as "Use Case 2"
+
+actor "Manager"
+
+actor A1 as "Actor1"
+actor A2 as "Actor2"
+
+actor A1 as "Actor1"
+usecase UC1 as "Use Case 1"
+
+A1 --> UC1
+
+rectangle database
+
+rectangle System{
+    usecase UC3 as "Use Case 3"
+    UC3 --> database
+    }
+@enduml

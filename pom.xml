@@ -8,6 +8,7 @@
     <artifactId>devops</artifactId>
     <version>0.1.0.3</version>
 
+
     <properties>
         <maven.compiler.source>18</maven.compiler.source>
         <maven.compiler.target>18</maven.compiler.target>

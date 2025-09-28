@@ -92,12 +92,43 @@ public class App{
 
     public void displayEmployee(Employee emp) {
         if (emp != null) {
-            System.out.println(
-                    emp.emp_no + " " + emp.first_name + " " + emp.last_name + "\n" + emp.title + "\n"
-                            + "Salary:" + emp.salary + "\n" + emp.dept_name + "\n" + "Manager: "
-                            + emp.manager + "\n");
+            System.out.printf("%d | %s %s | %s | Salary: %d%n",
+                    emp.emp_no, emp.first_name, emp.last_name,
+                    emp.dept_name, emp.salary);
         }
     }
+
+
+    public void getSalariesByDepartment(String department) {
+        try {
+            Statement stmt = con.createStatement();
+            String query =
+                    "SELECT e.emp_no, e.first_name, e.last_name, s.salary, d.dept_name " +
+                            "FROM employees e " +
+                            "JOIN salaries s ON e.emp_no = s.emp_no " +
+                            "JOIN dept_emp de ON e.emp_no = de.emp_no " +
+                            "JOIN departments d ON de.dept_no = d.dept_no " +
+                            "WHERE d.dept_name = '" + department + "' " +
+                            "AND s.to_date = '9999-01-01' " +   // ensures only current salary
+                            "ORDER BY s.salary DESC";
+
+            ResultSet rset = stmt.executeQuery(query);
+
+            while (rset.next()) {
+                Employee emp = new Employee();
+                emp.emp_no = rset.getInt("emp_no");
+                emp.first_name = rset.getString("first_name");
+                emp.last_name = rset.getString("last_name");
+                emp.salary = rset.getInt("salary");
+                emp.dept_name = rset.getString("dept_name");
+
+                displayEmployee(emp);
+            }
+        } catch (Exception e) {
+            System.out.println("Error retrieving salaries by department: " + e.getMessage());
+        }
+    }
+
     public static void main(String[] args)
     {
         // Create new Application
@@ -106,10 +137,11 @@ public class App{
         // Connect to database
         a.connect();
         // Get Employee
-        Employee emp = a.getEmployee(255530);
+        //Employee emp = a.getEmployee(255530);
         // Display results
-        a.displayEmployee(emp);
+        //a.displayEmployee(emp);
 
+        a.getSalariesByDepartment("Sales");
         // Disconnect from database
         a.disconnect();
     }

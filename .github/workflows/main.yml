@@ -3,7 +3,11 @@ on:
   push:
     branches:
       - master
-      - lab08
+      - develop
+
+permissions:
+  contents: write
+  pages: write
 jobs:
   UnitTests:
     name: Unit Tests

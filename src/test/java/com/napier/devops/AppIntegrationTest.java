@@ -1,26 +1,31 @@
 package com.napier.devops;
 
-import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.TestInstance;
+
+import java.util.ArrayList;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-class AppIntegrationTest{
-
+public class AppIntegrationTest
+{
     static App app;
 
-    @BeforeEach
-    void setUp() {
+    @BeforeAll
+    static void init()
+    {
         app = new App();
-        app.connect("localhost:33060", 10000);
+        app.connect("localhost:33060", 30000);
+
     }
 
     @Test
-    void testGetEmployee() {
+    void testGetEmployee()
+    {
         Employee emp = app.getEmployee(255530);
-        assertEquals(255530, emp.emp_no);
-        assertEquals("Ronghao", emp.first_name);
-        assertEquals("Garigliano", emp.last_name);
+        assertEquals(emp.emp_no, 255530);
+        assertEquals(emp.first_name, "Ronghao");
+        assertEquals(emp.last_name, "Garigliano");
     }
-
 }

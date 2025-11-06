@@ -15,5 +15,6 @@
 
 [![Releases](https://img.shields.io/github/release/LuMinAung40794408/sem/all.svg?style=flat-square)](https://github.com/LuMinAung40794408/sem/releases)
 
+[![codecov](https://codecov.io/gh/LuMinAung40794408/sem/branch/develop/graph/badge.svg?token=O4KXV352QT)](https://codecov.io/gh/LuMinAung40794408/sem)
 last update
 

@@ -26,12 +26,12 @@ class AppIntegrationTest{
     @Test
     void testAddEmployee() {
         Employee emp = new Employee();
-        emp.emp_no = 500000;
+        emp.emp_no = 5000000;
         emp.first_name = "Lu Min";
         emp.last_name = "Aung";
         app.addEmployee(emp);
-        emp = app.getEmployee(500000);
-        assertEquals(emp.emp_no, 500000);
+        emp = app.getEmployee(5000000);
+        assertEquals(emp.emp_no, 5000000);
         assertEquals(emp.first_name, "Lu Min");
         assertEquals(emp.last_name, "Aung");
     }

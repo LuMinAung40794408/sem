@@ -81,12 +81,14 @@ public class App {
     }
 
     public void displayEmployee(Employee emp) {
-        if (emp != null) {
-            System.out.printf("%d | %s %s | %s | Salary: %d%n",
-                    emp.emp_no, emp.first_name, emp.last_name,
-                    emp.dept, emp.salary);
+        if (emp == null) {
+            System.out.println("No employee");
+            return;
         }
+        System.out.println("Emp No  First Name  Last Name  Salary");
+        System.out.printf("%d  %s  %s  %d%n", emp.emp_no, emp.first_name, emp.last_name, emp.salary);
     }
+
 
 
     /**
@@ -182,11 +184,21 @@ public class App {
      *
      * @param employees The list of employees to print.
      */
-    public void printSalaries(ArrayList<Employee> employees) {
+    public void printSalaries(ArrayList<Employee> employees)
+    {
+        // Check employees is not null
+        if (employees == null)
+        {
+            System.out.println("No employees");
+            return;
+        }
         // Print header
         System.out.println(String.format("%-10s %-15s %-20s %-8s", "Emp No", "First Name", "Last Name", "Salary"));
         // Loop over all employees in the list
-        for (Employee emp : employees) {
+        for (Employee emp : employees)
+        {
+            if (emp == null)
+                continue;
             String emp_string =
                     String.format("%-10s %-15s %-20s %-8s",
                             emp.emp_no, emp.first_name, emp.last_name, emp.salary);
@@ -237,6 +249,7 @@ public class App {
         }
     }
 
+
     public static void main(String[] args) {
         // Create new Application
         App a = new App();
@@ -253,31 +266,31 @@ public class App {
 
 
         // Extract employee salary information
-        //ArrayList<Employee> employees = a.getAllSalaries();
+        ArrayList<Employee> employees = a.getAllSalaries();
         // Test the size of the returned data - should be 240124
-        //System.out.println(employees.size());
-        //a.printSalaries(employees);
+        System.out.println(employees.size());
+        a.printSalaries(employees);
 
         // Get Department object for "Sales"
         // Retrieve the "Sales" department object
-        Department sales = a.getDepartment("Sales");
+        //Department sales = a.getDepartment("Sales");
 
         // Check if department was found
-        if (sales != null) {
+        //if (sales != null) {
             // Retrieve all employees and salaries for the Sales department
-            ArrayList<Employee> salesEmployees = a.getSalariesByDepartment(sales);
+            //ArrayList<Employee> salesEmployees = a.getSalariesByDepartment(sales);
 
             // Print header
-            System.out.println(String.format("%-10s %-15s %-20s %-10s", "Emp No", "First Name", "Last Name", "Salary"));
+            //System.out.println(String.format("%-10s %-15s %-20s %-10s", "Emp No", "First Name", "Last Name", "Salary"));
 
             // Print each employee's details
-            for (Employee emp : salesEmployees) {
-                System.out.println(String.format("%-10d %-15s %-20s %-10d",
-                        emp.emp_no, emp.first_name, emp.last_name, emp.salary));
-            }
-        } else {
-            System.out.println("Department not found.");
-        }
+//            for (Employee emp : salesEmployees) {
+//                System.out.println(String.format("%-10d %-15s %-20s %-10d",
+//                        emp.emp_no, emp.first_name, emp.last_name, emp.salary));
+//            }
+//        } else {
+//            System.out.println("Department not found.");
+//        }
 
 
         // Disconnect from database

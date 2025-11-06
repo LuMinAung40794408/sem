@@ -10,6 +10,6 @@ COPY test_db/*.dump /tmp/
 # This is specific to MySQL.
 COPY test_db/employees.sql /docker-entrypoint-initdb.d
 # Copy user creation script to init folder
-COPY test_db/init-user.sql /docker-entrypoint-initdb.d/
+COPY test_db/init-user.sql /docker-entrypoint-initdb.d
 # Set the root password
 ENV MYSQL_ROOT_PASSWORD example

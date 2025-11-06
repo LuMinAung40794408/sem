@@ -251,6 +251,23 @@ public class App {
         }
     }
 
+    public void addEmployee(Employee emp) {
+        try {
+            String strUpdate = "INSERT INTO employees (emp_no, first_name, last_name, " +
+                    "birth_date, gender, hire_date) VALUES (?, ?, ?, '9999-01-01', 'M', '9999-01-01')";
+            PreparedStatement pstmt = con.prepareStatement(strUpdate);
+            pstmt.setInt(1, emp.emp_no);
+            pstmt.setString(2, emp.first_name);
+            pstmt.setString(3, emp.last_name);
+            pstmt.execute();
+            pstmt.close();
+        }
+        catch (Exception e) {
+            System.out.println(e.getMessage());
+            System.out.println("Failed to add employee");
+        }
+    }
+
 
     public static void main(String[] args) {
         // Create new Application

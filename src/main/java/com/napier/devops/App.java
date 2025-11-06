@@ -12,7 +12,7 @@ public class App {
     /**
      * Connect to the MySQL database.
      */
-    public void connect() {
+    public void connect(String location, int delay) {
         try {
             // Load Database driver
             Class.forName("com.mysql.cj.jdbc.Driver");
@@ -26,9 +26,11 @@ public class App {
             System.out.println("Connecting to database...");
             try {
                 // Wait a bit for db to start
-                Thread.sleep(30000);
+                Thread.sleep(delay);
                 // Connect to database
-                con = DriverManager.getConnection("jdbc:mysql://db:3306/employees?useSSL=false&allowPublicKeyRetrieval=true", "root", "example");
+                con = DriverManager.getConnection("jdbc:mysql://" + location
+                                + "/employees?allowPublicKeyRetrieval=true&useSSL=false",
+                        "root", "example");
                 System.out.println("Successfully connected");
                 break;
             } catch (SQLException sqle) {
@@ -254,8 +256,11 @@ public class App {
         // Create new Application
         App a = new App();
 
-        // Connect to database
-        a.connect();
+        if(args.length < 1){
+            a.connect("localhost:33060", 30000);
+        }else{
+            a.connect(args[0], Integer.parseInt(args[1]));
+        }
 
         // Get Employee
         //Employee emp = a.getEmployee(255530);
@@ -266,10 +271,10 @@ public class App {
 
 
         // Extract employee salary information
-        ArrayList<Employee> employees = a.getAllSalaries();
+        //ArrayList<Employee> employees = a.getAllSalaries();
         // Test the size of the returned data - should be 240124
-        System.out.println(employees.size());
-        a.printSalaries(employees);
+        //System.out.println(employees.size());
+        //a.printSalaries(employees);
 
         // Get Department object for "Sales"
         // Retrieve the "Sales" department object
@@ -291,7 +296,12 @@ public class App {
 //        } else {
 //            System.out.println("Department not found.");
 //        }
+        Department dept = a.getDepartment("Development");
+        ArrayList<Employee> employees = a.getSalariesByDepartment(dept);
 
+
+        // Print salary report
+        a.printSalaries(employees);
 
         // Disconnect from database
         a.disconnect();
